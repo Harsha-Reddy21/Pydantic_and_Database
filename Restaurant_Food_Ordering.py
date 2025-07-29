@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field,validator
 from enum import Enum
 from typing import List,Optional
 from decimal import Decimal
+import uvicorn
 
 app=FastAPI()
 
@@ -137,3 +138,7 @@ def delete_item(item_id:int):
 @app.get("/menu/category/{category}")
 def get_items_by_category(category:FoodCategory):
     return [item for item in menu_db.values() if item.category==category]
+
+
+if __name__=="__main__":
+    uvicorn.run(app,host="0.0.0.0",port=8000)
